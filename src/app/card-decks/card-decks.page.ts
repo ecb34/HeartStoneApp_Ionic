@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import {CardDeck} from '../models/card-deck';
+
 
 @Component({
   selector: 'app-card-decks',
@@ -8,18 +10,39 @@ import { ToastController } from '@ionic/angular';
 })
 export class CardDecksPage implements OnInit {
 
-  readonly cardDecks: string[] = ['Druid', 'Mage', 'Warrior', 'Rogue', 'Shaman'];
+  readonly mockupFile: string  = './assets/carddecks.json';
+
+  cardDecks: CardDeck [];
+  selectedCDs: string[] = [];
 
 
-  constructor(private toast: ToastController) {
-  }
+  constructor(private toast: ToastController) {}
   async ngOnInit() {
     const toast = await this.toast.create({
       message: 'Bienvenido a la app',
       duration: 2000,
       position: 'middle'
     });
-    toast.present();
+    await toast.present();
+
+    this.getData();
   }
 
+  public getData() {
+    fetch(this.mockupFile).then(res => res.json())
+        .then(json => {
+          this.cardDecks = json;
+        });
+  }
+
+  select(name: string) {
+    const indexCD = this.selectedCDs.indexOf(name);
+
+    if (indexCD !== -1) {
+        this.selectedCDs.splice(indexCD, 1);
+    } else {
+      this.selectedCDs.push(name);
+    }
+
+  }
 }

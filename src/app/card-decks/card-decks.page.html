@@ -7,13 +7,10 @@
 <ion-content>
   <ion-list>
     <ion-list-header>Classes</ion-list-header>
-    <ion-item *ngFor="let cardDeck of cardDecks">
-      <ion-avatar slot="start">
-        <img [src]="'../../assets/images/' + cardDeck + '.png'" alt="avatar"/>
-      </ion-avatar>
-      <ion-label>
-        <h2>{{cardDeck}}</h2>
-      </ion-label>
-    </ion-item>
+   <app-card-deck *ngFor="let cardDeck of cardDecks" [mycardDeck]="cardDeck" (clicked)="select($event)"></app-card-deck>
   </ion-list>
+  <p>
+    Selected Card decks:
+    <span *ngFor="let name of selectedCDs">{{name}}&nbsp;</span>
+  </p>
 </ion-content>

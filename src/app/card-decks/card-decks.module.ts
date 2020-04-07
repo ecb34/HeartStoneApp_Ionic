@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CardDecksPageRoutingModule } from './card-decks-routing.module';
-
+import {CardDeckComponent} from '../card-deck/card-deck.component';
 import { CardDecksPage } from './card-decks.page';
 
 @NgModule({
@@ -15,6 +15,6 @@ import { CardDecksPage } from './card-decks.page';
     IonicModule,
     CardDecksPageRoutingModule
   ],
-  declarations: [CardDecksPage]
+  declarations: [CardDecksPage,CardDeckComponent]
 })
 export class CardDecksPageModule {}
