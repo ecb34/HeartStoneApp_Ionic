@@ -13,7 +13,7 @@ export class CardDecksPage implements OnInit {
   readonly mockupFile: string  = './assets/carddecks.json';
 
   cardDecks: CardDeck [];
-  selectedCDs: string[] = [];
+  selectedCDs: CardDeck[] = [];
 
 
   constructor(private toast: ToastController) {}
@@ -35,13 +35,13 @@ export class CardDecksPage implements OnInit {
         });
   }
 
-  select(name: string) {
-    const indexCD = this.selectedCDs.indexOf(name);
+  select(cardDeck: CardDeck) {
+    const indexCD = this.selectedCDs.indexOf(cardDeck);
 
     if (indexCD !== -1) {
         this.selectedCDs.splice(indexCD, 1);
     } else {
-      this.selectedCDs.push(name);
+      this.selectedCDs.push(cardDeck);
     }
 
   }

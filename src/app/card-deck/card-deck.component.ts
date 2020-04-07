@@ -11,7 +11,7 @@ export class CardDeckComponent implements OnInit {
 
   @Input() mycardDeck: CardDeck;
 
-  @Output() clicked = new EventEmitter<string>();
+  @Output() clicked = new EventEmitter<CardDeck>();
 
   clickeado = false;
 
@@ -21,6 +21,6 @@ export class CardDeckComponent implements OnInit {
 
   click() {
     this.clickeado = !this.clickeado;
-    this.clicked.emit(this.mycardDeck.name);
+    this.clicked.emit(this.mycardDeck);
   }
 }

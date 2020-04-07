@@ -9,8 +9,9 @@
     <ion-list-header>Classes</ion-list-header>
    <app-card-deck *ngFor="let cardDeck of cardDecks" [mycardDeck]="cardDeck" (clicked)="select($event)"></app-card-deck>
   </ion-list>
-  <p>
-    Selected Card decks:
-    <span *ngFor="let name of selectedCDs">{{name}}&nbsp;</span>
-  </p>
+  <ul>
+    <li *ngFor="let cardDeck of selectedCDs">
+      {{cardDeck.name}}: <span *ngFor="let card of cardDeck.cards">{{card}} </span>
+    </li>
+  </ul>
 </ion-content>
