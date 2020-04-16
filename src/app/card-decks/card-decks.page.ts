@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import {CardDeck} from '../models/card-deck';
+import { Component } from '@angular/core';
+import {CardService} from '../card.service';
+import {CardDeck } from '../card/shared/card.model';
+
 
 
 @Component({
@@ -8,41 +9,29 @@ import {CardDeck} from '../models/card-deck';
   templateUrl: './card-decks.page.html',
   styleUrls: ['./card-decks.page.scss'],
 })
-export class CardDecksPage implements OnInit {
+export class CardDecksPage {
 
-  readonly mockupFile: string  = './assets/carddecks.json';
+  private readonly ALLOWED_DECKS = ['classes', 'factions', 'qualities', 'types', 'races'];
 
-  cardDecks: CardDeck [];
-  selectedCDs: CardDeck[] = [];
+  public cardDecks: CardDeck [] = [];
+
+  constructor(private cardService: CardService) {
+    this.getCardDecks();
+  }
 
 
-  constructor(private toast: ToastController) {}
-  async ngOnInit() {
-    const toast = await this.toast.create({
-      message: 'Bienvenido a la app',
-      duration: 2000,
-      position: 'middle'
+  private getCardDecks() {
+    this.cardService.getAllCardDecks().subscribe(
+        (cardDecks: CardDeck[]) => {
+          this.extractAllowedDecks(cardDecks);
+        }
+    );
+  }
+
+  private extractAllowedDecks(cardDecks: CardDeck[]) {
+    this.ALLOWED_DECKS.forEach((deckName: string) => {
+      this.cardDecks.push({name: deckName, types: cardDecks[deckName]});
     });
-    await toast.present();
-
-    this.getData();
-  }
-
-  public getData() {
-    fetch(this.mockupFile).then(res => res.json())
-        .then(json => {
-          this.cardDecks = json;
-        });
-  }
-
-  select(cardDeck: CardDeck) {
-    const indexCD = this.selectedCDs.indexOf(cardDeck);
-
-    if (indexCD !== -1) {
-        this.selectedCDs.splice(indexCD, 1);
-    } else {
-      this.selectedCDs.push(cardDeck);
-    }
-
   }
 }
+

@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import {HttpClientModule} from '@angular/common/http';
 import { CardDecksPageRoutingModule } from './card-decks-routing.module';
-import {CardDeckComponent} from '../card-deck/card-deck.component';
+import {CardListComponent} from '../card-list/card-list.component';
 import { CardDecksPage } from './card-decks.page';
 
 @NgModule({
@@ -13,8 +13,9 @@ import { CardDecksPage } from './card-decks.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CardDecksPageRoutingModule
+    CardDecksPageRoutingModule,
+    HttpClientModule
   ],
-  declarations: [CardDecksPage,CardDeckComponent]
+  declarations: [CardDecksPage, CardListComponent]
 })
 export class CardDecksPageModule {}
