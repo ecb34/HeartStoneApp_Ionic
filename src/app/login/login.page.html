@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="doLogin()" *ngIf="!logeado">
+    <ion-card no-padding class="animated fadeInUp">
+      <ion-card-content>
+        <ion-label position="floating">
+          <ion-icon name="mail" item-start></ion-icon>
+          Email
+        </ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+        <ion-label position="floating">
+          <ion-icon name="lock-closed" item-start></ion-icon>
+          Contraseña
+        </ion-label>
+        <ion-input type="text" formControlName="clave"></ion-input>
+        <ion-button icon-left size="medium" expand="full" shape="round" color="success" type="submit" [disabled]="!form.valid" tappable>
+         <ion-icon name="log-in"></ion-icon> Entrar
+        </ion-button>
+        <div *ngIf="form.invalid && (form.dirty || form.touched)">
+          <p *ngIf="form.get('email').hasError('required')">Email es obligatorio</p>
+          <p *ngIf="form.get('email').hasError('email')">Email Formato incorrecto</p>
+          <p *ngIf="form.get('clave').hasError('required')">Contraseña es obligatoria</p>
+          <p *ngIf="form.get('clave').hasError('minlength')">Contraseña mínimo 6 carácteres</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </form>
+  <ion-card *ngIf="logeado">
+    <ion-card-title>Login Enviado!</ion-card-title>
+    <ion-card-content>
+      <p>Email: {{usuario.email}}</p>
+      <p>Clave: {{usuario.clave}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
