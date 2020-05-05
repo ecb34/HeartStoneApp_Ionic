@@ -9,6 +9,11 @@ export class CardListComponent implements OnInit {
 
   @Input() items: string[];
   @Input() listName: string;
+  @Input() navigateTo: any;
+
+  generateURL(group: string, deck: string) {
+    return `tabs/cards/card-listing/${group}/${deck}`;
+  }
   constructor() { }
 
   ngOnInit() {}
